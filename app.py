@@ -3,7 +3,7 @@ import logging
 import os
 from dotenv import load_dotenv
 load_dotenv()
-from default_button import button
+from default_button import button, menu_button
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
@@ -24,6 +24,9 @@ dp = Dispatcher(bot)
 async def send_welcome(message: types.Message):
     await message.reply(f"Salom {message.from_user.first_name}", reply_markup=button)
 
+@dp.message_handler(lambda message: message.text == 'Menyu')
+async def send_welcome(message: types.Message):
+    await message.reply(f"Salom {message.from_user.first_name}", reply_markup=menu_button)
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
