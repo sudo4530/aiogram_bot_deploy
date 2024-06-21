@@ -3,6 +3,7 @@ import logging
 import os
 from dotenv import load_dotenv
 load_dotenv()
+from default_button import button
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
@@ -19,10 +20,9 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.reply(f"Salom {message.from_user.first_name}")
+    await message.reply(f"Salom {message.from_user.first_name}", reply_markup=button)
 
 
 if __name__ == '__main__':
